@@ -29,6 +29,7 @@ import { connect } from "react-redux"
 
 import Article from "../components/Article/Article"
 import AddArticle from "../components/AddArticle/AddArticle"
+import * as actionTypes from "../store/actionTypes"
 
 const Articles = ({ articles }) => {
   const saveArticle = e => {
@@ -51,4 +52,11 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Articles)
+const mapDispatchToProps = dispatch => {
+  return {
+    saveArticle: article =>
+      dispatch({ type: actionTypes.ADD_ARTICLE, articleData: { article } }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Articles)
